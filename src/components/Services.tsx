@@ -12,8 +12,8 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 noise-overlay">
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="services" className="py-24">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -32,9 +32,7 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`group p-8 rounded-2xl bg-card border border-border hover:glow-orange-border hover:-translate-y-1 transition-all duration-300 ${
-                i === 0 ? "md:col-span-2 lg:col-span-1" : ""
-              }`}
+              className="group p-8 rounded-2xl bg-card border border-border hover:glow-orange-border hover:-translate-y-1 transition-all duration-300"
             >
               <s.icon className="w-8 h-8 text-primary mb-5" strokeWidth={1.5} />
               <h3 className="font-display text-xl font-bold mb-2">{s.title}</h3>
