@@ -13,9 +13,9 @@ const tagPositions = [
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay dot-grid">
-      {/* Orange radial glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-primary/10 blur-[150px] pointer-events-none" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden dot-grid">
+      {/* Subtle orange radial glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-primary/5 blur-[150px] pointer-events-none" />
 
       {/* Floating tags */}
       {tags.map((tag, i) => (
@@ -27,7 +27,7 @@ const Hero = () => {
           className={`absolute hidden lg:block ${tagPositions[i]} z-10`}
         >
           <div
-            className="px-4 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur-sm text-xs text-muted-foreground animate-float"
+            className="px-4 py-1.5 rounded-full border border-border bg-background/80 backdrop-blur-sm text-xs text-muted-foreground animate-float shadow-sm"
             style={{ animationDelay: `${i * 0.5}s` }}
           >
             {tag}
@@ -40,7 +40,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-display font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight"
+          className="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-foreground"
         >
           We Build Software
           <br />
@@ -67,13 +67,13 @@ const Hero = () => {
         >
           <a
             href="#contact"
-            className="px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-base hover:glow-orange-sm hover:scale-105 transition-all duration-200"
+            className="px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-base hover:opacity-90 hover:scale-105 transition-all duration-200"
           >
             Start a Project
           </a>
           <a
             href="#work"
-            className="px-8 py-3.5 rounded-full border border-foreground/20 text-foreground font-semibold text-base hover:border-foreground/50 transition-all duration-200"
+            className="px-8 py-3.5 rounded-full border border-border text-foreground font-semibold text-base hover:border-foreground/30 hover:bg-muted transition-all duration-200"
           >
             See Our Work
           </a>

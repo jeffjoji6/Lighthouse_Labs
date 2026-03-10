@@ -9,8 +9,8 @@ const steps = [
 
 const Process = () => {
   return (
-    <section id="process" className="py-24 noise-overlay">
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="process" className="py-24">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -21,7 +21,6 @@ const Process = () => {
         </motion.div>
 
         <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Dashed connector line */}
           <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px border-t-2 border-dashed border-primary/30" />
 
           {steps.map((step, i) => (
@@ -33,7 +32,7 @@ const Process = () => {
               transition={{ delay: i * 0.15 }}
               className="relative text-center md:text-left"
             >
-              <span className="inline-block font-display text-3xl font-extrabold text-primary mb-4 relative z-10 bg-background px-2">
+              <span className="inline-block font-display text-3xl font-black text-primary mb-4 relative z-10 bg-background px-2">
                 {step.num}
               </span>
               <h3 className="font-display text-xl font-bold mb-2">{step.title}</h3>

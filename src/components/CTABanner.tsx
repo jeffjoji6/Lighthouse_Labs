@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const CTABanner = () => {
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
+    <section id="contact" className="relative py-32 overflow-hidden section-dark">
       {/* Orange glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[400px] rounded-full bg-primary/15 blur-[120px]" />
@@ -24,7 +24,7 @@ const CTABanner = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="text-muted-foreground text-lg max-w-xl mx-auto mb-10"
+          className="text-lg max-w-xl mx-auto mb-10 opacity-70"
         >
           Let's turn your idea into a product your users love.
         </motion.p>
@@ -34,7 +34,7 @@ const CTABanner = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="inline-flex px-10 py-4 rounded-full bg-primary text-primary-foreground text-lg font-bold hover:glow-orange-sm hover:scale-105 transition-all duration-200"
+          className="inline-flex px-10 py-4 rounded-full bg-primary text-primary-foreground text-lg font-bold hover:opacity-90 hover:scale-105 transition-all duration-200"
         >
           Let's Talk
         </motion.a>

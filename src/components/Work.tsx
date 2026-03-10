@@ -11,7 +11,7 @@ const projects = [
 
 const Work = () => {
   return (
-    <section id="work" className="py-24 border-y border-border">
+    <section id="work" className="py-24 bg-muted/30 border-y border-border">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -30,18 +30,17 @@ const Work = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="group relative rounded-2xl overflow-hidden cursor-pointer"
+              className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm border border-border"
             >
               <img
                 src={p.img}
                 alt={p.name}
                 className="w-full h-72 md:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-background/60 group-hover:bg-primary/20 transition-colors duration-300 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 bg-foreground/50 group-hover:bg-primary/20 transition-colors duration-300 flex flex-col justify-end p-8">
                 <p className="text-xs text-primary font-semibold tracking-wider uppercase mb-2">{p.tags}</p>
-                <h3 className="font-display text-2xl md:text-3xl font-bold mb-1">{p.name}</h3>
-                <p className="text-muted-foreground text-sm mb-3">{p.desc}</p>
+                <h3 className="font-display text-2xl md:text-3xl font-bold mb-1 text-primary-foreground">{p.name}</h3>
+                <p className="text-primary-foreground/80 text-sm mb-3">{p.desc}</p>
                 <span className="text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   View Case Study →
                 </span>

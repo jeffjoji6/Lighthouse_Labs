@@ -15,7 +15,7 @@ const features = [
 
 const Stats = () => {
   return (
-    <section className="py-24 border-y border-border">
+    <section className="py-24 bg-muted/30 border-y border-border">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -25,8 +25,8 @@ const Stats = () => {
         >
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="font-display text-5xl md:text-6xl font-extrabold text-primary">{s.num}</p>
-              <p className="mt-2 text-muted-foreground text-sm">{s.label}</p>
+              <p className="font-display text-5xl md:text-6xl font-black text-primary">{s.num}</p>
+              <p className="mt-2 text-muted-foreground text-sm font-medium">{s.label}</p>
             </div>
           ))}
         </motion.div>
