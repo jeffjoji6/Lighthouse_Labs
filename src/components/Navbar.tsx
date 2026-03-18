@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import logo from "@/assets/logo_emblem.png";
 
 const navLinks = ["Services", "Work", "Process", "About"];
 
@@ -25,10 +24,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-6">
         <a href="#" className="flex items-center gap-3">
-          <img src={logo} alt="Lighthouse Labs" className="h-9 w-9" />
-          <span className="font-display font-bold text-lg text-foreground">
-            Lighthouse Labs
-          </span>
+          <img src="/logo.png" alt="Lighthouse Labs" className="h-12 w-auto object-contain" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -36,7 +32,7 @@ const Navbar = () => {
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="text-base font-semibold text-foreground/80 hover:text-primary transition-colors duration-200"
             >
               {link}
             </a>

@@ -1,12 +1,20 @@
 import { motion } from "framer-motion";
 import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 
 const projects = [
-  { img: project1, name: "NovaPay Dashboard", tags: "Fintech · Web App", desc: "A real-time analytics platform handling millions of transactions daily." },
-  { img: project2, name: "PulseHealth", tags: "Healthcare · Mobile", desc: "A patient engagement app used across 40+ clinics nationwide." },
-  { img: project3, name: "CartCraft", tags: "E-Commerce · Platform", desc: "A headless commerce engine powering $20M+ in annual revenue." },
+  {
+    img: project1,
+    name: "NovaPay Dashboard",
+    tags: "Fintech · Web App",
+    desc: "A real-time analytics platform designed to process and visualize large-scale financial data.",
+  },
+  {
+    img: project3,
+    name: "CartCraft",
+    tags: "E-Commerce · Platform",
+    desc: "A scalable commerce platform powering modern online storefronts and operational workflows.",
+  },
 ];
 
 const Work = () => {
@@ -22,7 +30,7 @@ const Work = () => {
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-16">Work That Speaks</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((p, i) => (
             <motion.div
               key={p.name}
@@ -35,7 +43,7 @@ const Work = () => {
               <img
                 src={p.img}
                 alt={p.name}
-                className="w-full h-72 md:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-72 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-foreground/50 group-hover:bg-primary/20 transition-colors duration-300 flex flex-col justify-end p-8">
                 <p className="text-xs text-primary font-semibold tracking-wider uppercase mb-2">{p.tags}</p>
@@ -48,6 +56,16 @@ const Work = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="text-center text-muted-foreground text-sm mt-10"
+        >
+          Selected examples of products and platforms built by Lighthouse Labs.
+        </motion.p>
       </div>
     </section>
   );

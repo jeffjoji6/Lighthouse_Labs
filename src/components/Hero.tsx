@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import UnicornScene from "unicornstudio-react";
 
-const tags = ["React", "Node.js", "AI/ML", "Mobile", "Cloud", "TypeScript"];
+const tags = ["Website Development", "E-commerce Platforms", "Digital Infrastructure", "Business Websites", "Web Applications", "Digital Growth"];
 
 const tagPositions = [
   "top-[15%] left-[5%]",
@@ -13,9 +14,21 @@ const tagPositions = [
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden dot-grid">
-      {/* Subtle orange radial glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-primary/5 blur-[150px] pointer-events-none" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Interactive Unicorn Background */}
+      <div className="absolute inset-0 z-0 opacity-80 pointer-events-auto">
+        <UnicornScene
+          projectId="vfZ76bXTgNQ4KVeQSIqb"
+          width="100%"
+          height="100%"
+          scale={1}
+          dpi={1.5}
+          sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@2.1.4/dist/unicornStudio.umd.js"
+        />
+      </div>
+      
+      {/* Overlay to ensure text readability */}
+      <div className="absolute inset-0 z-0 bg-background/50 pointer-events-none" />
 
       {/* Floating tags */}
       {tags.map((tag, i) => (
@@ -27,7 +40,7 @@ const Hero = () => {
           className={`absolute hidden lg:block ${tagPositions[i]} z-10`}
         >
           <div
-            className="px-4 py-1.5 rounded-full border border-border bg-background/80 backdrop-blur-sm text-xs text-muted-foreground animate-float shadow-sm"
+            className="px-5 py-2 rounded-full border border-border/50 bg-background/60 backdrop-blur-md text-sm font-medium text-foreground/90 animate-float shadow-sm"
             style={{ animationDelay: `${i * 0.5}s` }}
           >
             {tag}
@@ -42,21 +55,21 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-foreground"
         >
-          We Build Software
+          Guiding Businesses
           <br />
-          <span className="text-gradient-orange">That Scales,</span>
+          <span className="text-gradient-orange">Through the</span>
           <br />
-          Ships, & Lasts.
+          Digital Ocean.
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
-          className="mt-8 max-w-2xl mx-auto text-lg text-muted-foreground"
+          className="mt-8 max-w-2xl mx-auto text-xl text-foreground/80 font-medium leading-relaxed"
         >
-          Lighthouse Labs is a full-service software agency crafting web apps,
-          mobile products, and AI-powered tools for ambitious teams.
+          Lighthouse Labs helps businesses build powerful websites, strengthen their online
+          presence, and navigate the digital world with confidence.
         </motion.p>
 
         <motion.div
@@ -78,6 +91,15 @@ const Hero = () => {
             See Our Work
           </a>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="mt-12 text-sm font-semibold text-foreground/70 tracking-widest uppercase"
+        >
+          Web Development · Business Websites · E-commerce Platforms · Digital Infrastructure
+        </motion.p>
       </div>
     </section>
   );

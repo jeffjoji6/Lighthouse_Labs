@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const steps = [
-  { num: "01", title: "Discover", desc: "We dig into your goals, users, and market to define the right problem to solve." },
-  { num: "02", title: "Design", desc: "Wireframes, prototypes, and a polished UI that makes your product feel inevitable." },
-  { num: "03", title: "Build", desc: "Clean, tested code shipped in agile sprints — transparent progress every week." },
-  { num: "04", title: "Launch", desc: "Deployment, monitoring, and optimization to ensure a flawless go-live." },
+  { num: "01", title: "Discover", desc: "We start by understanding your business goals, users, and market to identify the right problems to solve." },
+  { num: "02", title: "Design", desc: "Through wireframes and interface design, we transform ideas into structured product experiences." },
+  { num: "03", title: "Build", desc: "Clean, production-ready code delivered in agile cycles with transparent progress updates." },
+  { num: "04", title: "Launch", desc: "Deployment, monitoring, and ongoing improvements ensure your product performs reliably." },
 ];
 
 const Process = () => {
