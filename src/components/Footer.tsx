@@ -97,13 +97,18 @@ const Footer = () => {
           <motion.div variants={columnVariants}>
             <h4 className="font-display font-medium text-xs uppercase tracking-widest text-[#d4d4d8] mb-6">Get in Touch</h4>
             <div className="space-y-3">
-              <a href="mailto:hello@lighthouselabs.dev" className="block text-xs hover:text-white transition-colors">
-                hello@lighthouselabs.dev
+              <a href="mailto:labs.lighthouse@gmail.com" className="block text-xs hover:text-white transition-colors">
+                labs.lighthouse@gmail.com
               </a>
               <div className="flex gap-4 pt-4">
-                {["GitHub", "LinkedIn", "X", "Dribbble"].map((s) => (
-                  <a key={s} href="#" className="text-xs hover:text-primary transition-colors">
-                    {s}
+                {[
+                  { name: "GitHub", href: "#" },
+                  { name: "LinkedIn", href: "https://www.linkedin.com/in/lighthouse-labs/" },
+                  { name: "X", href: "#" },
+                  { name: "Dribbble", href: "#" }
+                ].map((s) => (
+                  <a key={s.name} href={s.href} target={s.href !== "#" ? "_blank" : undefined} rel={s.href !== "#" ? "noopener noreferrer" : undefined} className="text-xs hover:text-primary transition-colors">
+                    {s.name}
                   </a>
                 ))}
               </div>
