@@ -9,7 +9,7 @@ import WhoWeWorkWith from "@/components/WhoWeWorkWith";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
 
-const Index = () => {
+export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
@@ -24,6 +24,4 @@ const Index = () => {
       <Footer />
     </div>
   );
-};
-
-export default Index;
+}

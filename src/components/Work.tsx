@@ -1,17 +1,17 @@
+"use client";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import project1 from "@/assets/project-1.jpg";
-import project3 from "@/assets/project-3.jpg";
 
 const projects = [
   {
-    img: project1,
+    img: "/project-1.jpg",
     name: "NovaPay Dashboard",
     tags: "Fintech · Web App",
     desc: "A real-time analytics platform designed to process and visualize large-scale financial data.",
   },
   {
-    img: project3,
+    img: "/project-3.jpg",
     name: "CartCraft",
     tags: "E-Commerce · Platform",
     desc: "A scalable commerce platform powering modern online storefronts and operational workflows.",
