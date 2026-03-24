@@ -1,106 +1,155 @@
-import { motion } from "framer-motion";
-import UnicornScene from "unicornstudio-react";
+import { motion, useMotionValue, useSpring, useMotionTemplate, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
 
-const tags = ["Website Development", "E-commerce Platforms", "Digital Infrastructure", "Business Websites", "Web Applications", "Digital Growth"];
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
 
-const tagPositions = [
-  "top-[15%] left-[5%]",
-  "top-[10%] right-[8%]",
-  "top-[45%] right-[3%]",
-  "bottom-[20%] right-[10%]",
-  "bottom-[15%] left-[3%]",
-  "top-[35%] left-[2%]",
-];
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as any } },
+};
 
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Interactive Unicorn Background */}
-      <div className="absolute inset-0 z-0 opacity-80 pointer-events-auto">
-        <UnicornScene
-          projectId="vfZ76bXTgNQ4KVeQSIqb"
-          width="100%"
-          height="100%"
-          scale={1}
-          dpi={1.5}
-          sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@2.1.4/dist/unicornStudio.umd.js"
-        />
-      </div>
-      
-      {/* Overlay to ensure text readability */}
-      <div className="absolute inset-0 z-0 bg-background/50 pointer-events-none" />
+  const containerRef = useRef<HTMLElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-      {/* Floating tags */}
-      {tags.map((tag, i) => (
-        <motion.div
-          key={tag}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1 + i * 0.15, duration: 0.5 }}
-          className={`absolute hidden lg:block ${tagPositions[i]} z-10`}
+  const smoothX = useSpring(mouseX, { damping: 40, stiffness: 150 });
+  const smoothY = useSpring(mouseY, { damping: 40, stiffness: 150 });
+
+  // Premium Scroll Parallax Effects
+  const { scrollY } = useScroll();
+  const bgScale = useTransform(scrollY, [0, 1000], [1, 1.4]);
+
+  useEffect(() => {
+    mouseX.set(typeof window !== "undefined" ? window.innerWidth / 2 : 0);
+    mouseY.set(typeof window !== "undefined" ? window.innerHeight / 2 : 0);
+  }, [mouseX, mouseY]);
+
+  const handleMouseMove = (e: React.MouseEvent | React.TouchEvent | any) => {
+    if (!containerRef.current) return;
+    const { left, top } = containerRef.current.getBoundingClientRect();
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  };
+
+  const maskImage = useMotionTemplate`radial-gradient(450px circle at ${smoothX}px ${smoothY}px, black 0%, transparent 100%)`;
+
+  const radialLines = Array.from({ length: 72 }).map((_, i) => (
+    <div
+      key={i}
+      className="absolute w-full h-[1px] bg-foreground origin-center"
+      style={{ transform: `rotate(${i * 5}deg)` }}
+    />
+  ));
+  
+  const glowingLines = Array.from({ length: 72 }).map((_, i) => (
+    <div
+      key={`glow-${i}`}
+      className="absolute w-full h-[2px] bg-primary origin-center"
+      style={{ transform: `rotate(${i * 5}deg)` }}
+    />
+  ));
+
+  return (
+    <section 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onTouchMove={handleMouseMove}
+      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-background pt-32"
+    >
+      {/* Background Interactive Visuals tied to Scroll */}
+      <motion.div 
+        style={{ scale: bgScale }}
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+      >
+        {/* Base dim layer */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05]">
+          <div className="relative w-[1500px] h-[1500px] flex items-center justify-center animate-[spin_240s_linear_infinite]">
+            {radialLines}
+            <div className="absolute w-[600px] h-[600px] bg-background rounded-full" />
+            <div className="absolute w-[800px] h-[800px] border border-dashed border-foreground bg-transparent rounded-full" />
+            <div className="absolute w-[1000px] h-[1000px] border border-dashed border-foreground opacity-50 bg-transparent rounded-full" />
+          </div>
+        </div>
+        
+        {/* Interactive glowing spotlight layer */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center opacity-40 mix-blend-multiply"
+          style={{ WebkitMaskImage: maskImage, maskImage }}
         >
-          <div
-            className="px-5 py-2 rounded-full border border-border/50 bg-background/60 backdrop-blur-md text-sm font-medium text-foreground/90 animate-float shadow-sm"
-            style={{ animationDelay: `${i * 0.5}s` }}
-          >
-            {tag}
+          <div className="relative w-[1500px] h-[1500px] flex items-center justify-center animate-[spin_240s_linear_infinite]">
+            {glowingLines}
+            <div className="absolute w-[600px] h-[600px] bg-background rounded-full" />
+            <div className="absolute w-[800px] h-[800px] border-2 border-dashed border-primary bg-transparent rounded-full" />
+            <div className="absolute w-[1000px] h-[1000px] border-2 border-dashed border-primary opacity-50 bg-transparent rounded-full" />
           </div>
         </motion.div>
-      ))}
+      </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      {/* Main Content */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="container mx-auto px-6 relative z-10 text-center max-w-5xl"
+      >
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-foreground"
+          variants={itemVariants}
+          className="font-display font-medium text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tighter text-foreground"
         >
-          Guiding Businesses
-          <br />
-          <span className="text-gradient-orange">Through the</span>
-          <br />
-          Digital Ocean.
+          Guiding Businesses <br className="md:hidden" /> Through
+          <br className="hidden md:block" /> the <span className="text-foreground/60">Digital Ocean.</span>
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.7 }}
-          className="mt-8 max-w-2xl mx-auto text-xl text-foreground/80 font-medium leading-relaxed"
+          variants={itemVariants}
+          className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-foreground/60 font-normal leading-relaxed tracking-wide"
         >
           Lighthouse Labs helps businesses build powerful websites, strengthen their online
           presence, and navigate the digital world with confidence.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          variants={itemVariants}
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
+          <motion.a
             href="#contact"
-            className="px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-base hover:opacity-90 hover:scale-105 transition-all duration-200"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm shadow-sm transition-colors hover:bg-primary/90"
           >
             Start a Project
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#work"
-            className="px-8 py-3.5 rounded-full border border-border text-foreground font-semibold text-base hover:border-foreground/30 hover:bg-muted transition-all duration-200"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-3.5 rounded bg-card text-foreground font-semibold text-sm border border-border/50 transition-colors hover:bg-border/30"
           >
             See Our Work
-          </a>
+          </motion.a>
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="mt-12 text-sm font-semibold text-foreground/70 tracking-widest uppercase"
-        >
-          Web Development · Business Websites · E-commerce Platforms · Digital Infrastructure
-        </motion.p>
-      </div>
+        <motion.div variants={itemVariants} className="my-16 flex items-center justify-center gap-8 text-xs font-semibold text-foreground/40 uppercase tracking-widest">
+          <span>Web Development</span>
+          <span className="hidden sm:inline w-1 h-1 rounded-full bg-foreground/30" />
+          <span>Digital Infrastructure</span>
+          <span className="hidden md:inline w-1 h-1 rounded-full bg-foreground/30" />
+          <span className="hidden md:inline">E-commerce</span>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

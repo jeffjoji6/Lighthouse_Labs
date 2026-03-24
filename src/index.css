@@ -7,22 +7,22 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 11%;
+    --foreground: 240 5% 10%; /* Very dark gray #18181a */
 
-    --card: 210 20% 98%;
-    --card-foreground: 0 0% 11%;
+    --card: 240 5% 96%; /* Light gray #f4f4f5 for flat cards */
+    --card-foreground: 240 5% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 11%;
+    --popover-foreground: 240 5% 10%;
 
-    --primary: 24 85% 52%;
+    --primary: 24 85% 52%; /* Tasteful tiger orange */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 0 0% 11%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 5% 10%;
 
-    --muted: 210 15% 95%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 40%; /* Professional muted text */
 
     --accent: 24 85% 52%;
     --accent-foreground: 0 0% 100%;
@@ -30,40 +30,42 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 240 5% 90%; /* Lighter border, used sparingly */
+    --input: 240 5% 90%;
     --ring: 24 85% 52%;
 
-    --radius: 0.75rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 11%;
-    --sidebar-primary: 24 85% 52%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 20% 96%;
-    --sidebar-accent-foreground: 0 0% 11%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 24 85% 52%;
+    --radius: 0.5rem; /* Sharper default radius for professional look */
 
     /* Custom tokens */
     --tiger-orange: 24 85% 52%;
-    --dark-section: 0 0% 11%;
-    --dark-card: 0 0% 13%;
-    --subtle-border: 220 13% 91%;
+    --dark-section: 240 5% 6%; /* Almost black for dramatic sections */
+    --dark-card: 240 5% 12%; 
+    --subtle-border: 240 5% 90%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
+    /* Custom Awwwards cursor override — hide native points unless text */
+    cursor: none !important;
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground;
+    /* Removed heavy default transitions on body to keep things snappy */
+  }
+  /* Restore native text cursors where appropriate */
+  p, h1, h2, h3, h4, h5, h6, span {
+    cursor: text !important;
+  }
+  /* Hide cursor explicitly on interactive elements as well, allowing the custom cursor to rule */
+  a, button, [role="button"] {
+    cursor: none !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display tracking-tight; /* Tighter tracking for premium feel */
   }
 }
 

@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
+import CursorGlow from "./components/CursorGlow";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -13,6 +15,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <CursorGlow />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

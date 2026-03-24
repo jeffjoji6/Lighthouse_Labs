@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Shield, Zap, TrendingUp, Globe } from "lucide-react";
 
 const features = [
@@ -24,37 +25,90 @@ const features = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 1, 0.5, 1] as any }
+  },
+};
+
+const FeatureCard = ({ f, index }: { f: any, index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Asymmetric Scroll Parallax: Alternating cards shift at different speeds
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const yParallax = useTransform(scrollYProgress, [0, 1], [40, index % 2 === 0 ? -20 : 20]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ y: yParallax }}
+      variants={itemVariants}
+      className="flex flex-col gap-4 cursor-default"
+    >
+      <div className="relative">
+        <f.icon className="w-5 h-5 text-foreground opacity-60 relative z-10" strokeWidth={1.5} />
+      </div>
+      <div>
+        <div className="overflow-hidden mb-2">
+          <motion.h3
+            initial={{ y: "100%" }}
+            whileInView={{ y: "0%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 + (index * 0.1), ease: [0.25, 1, 0.5, 1] as any }}
+            className="font-display font-medium tracking-tight text-base"
+          >
+            {f.title}
+          </motion.h3>
+        </div>
+        <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
+      </div>
+    </motion.div>
+  );
+};
+
 const Stats = () => {
   return (
-    <section className="py-24 bg-muted/30 border-y border-border">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-card overflow-hidden">
+      <div className="container mx-auto px-6 max-w-6xl">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center text-muted-foreground mb-20 max-w-2xl mx-auto"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center font-display text-lg text-foreground/60 mb-20 max-w-2xl mx-auto tracking-tight"
         >
-          Trusted by startups, growing businesses, and teams building ambitious digital products.
+          Trusted by startups, growing businesses, and ambitious digital products.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="flex gap-4"
-            >
-              <f.icon className="w-6 h-6 text-primary shrink-0 mt-1" strokeWidth={1.5} />
-              <div>
-                <h3 className="font-display font-bold text-base mb-1">{f.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
-              </div>
-            </motion.div>
+            <FeatureCard key={f.title} f={f} index={i} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
