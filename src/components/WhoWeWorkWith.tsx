@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 const audiences = [
