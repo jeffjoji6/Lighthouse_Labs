@@ -88,20 +88,20 @@ const FeatureCard = ({ f, index }: { f: any, index: number }) => {
 
 const Stats = () => {
   return (
-    <section className="py-24 bg-card overflow-hidden">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section className="py-16 md:py-24 bg-card overflow-hidden">
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
-          className="text-center font-display text-lg text-foreground/60 mb-20 max-w-2xl mx-auto tracking-tight"
+          className="text-center font-display text-base sm:text-lg text-foreground/60 mb-12 md:mb-20 max-w-2xl mx-auto tracking-tight"
         >
           Trusted by startups, growing businesses, and ambitious digital products.
         </motion.p>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

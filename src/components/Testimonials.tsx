@@ -55,7 +55,7 @@ const TestimonialCard = ({ t }: { t: any }) => {
     <motion.div
       variants={itemVariants}
       onMouseMove={handleMouseMove}
-      className="p-10 rounded-xl bg-card relative group cursor-default overflow-hidden border border-border/50"
+      className="p-6 sm:p-8 md:p-10 rounded-xl bg-card relative group cursor-default overflow-hidden border border-border/50"
     >
       <motion.div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-500 group-hover:opacity-100"
@@ -85,8 +85,8 @@ const TestimonialCard = ({ t }: { t: any }) => {
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-background overflow-hidden">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section className="py-16 md:py-24 bg-background overflow-hidden">
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -100,12 +100,12 @@ const Testimonials = () => {
             className="mb-16"
           >
             <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-4">Testimonials</p>
-            <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight">Clients Who Trust Us</h2>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">Clients Who Trust Us</h2>
           </motion.div>
 
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 group/grid"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 group/grid"
           >
             {testimonials.map((t) => (
               <TestimonialCard key={t.name} t={t} />

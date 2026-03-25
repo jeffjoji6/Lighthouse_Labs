@@ -46,7 +46,7 @@ const PhilosophyCard = () => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: 0.1, duration: 0.8 }}
       onMouseMove={handleMouseMove}
-      className="p-12 rounded-2xl bg-card relative group cursor-default overflow-hidden border border-border/50"
+      className="p-8 sm:p-10 md:p-12 rounded-2xl bg-card relative group cursor-default overflow-hidden border border-border/50"
     >
       <motion.div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-500 group-hover:opacity-100"
@@ -61,7 +61,7 @@ const PhilosophyCard = () => {
         }}
       />
       <div className="relative z-10">
-        <h3 className="font-display text-2xl font-medium tracking-tight mb-6">
+        <h3 className="font-display text-xl sm:text-2xl font-medium tracking-tight mb-4 md:mb-6">
           A Lighthouse for Your Digital Journey
         </h3>
         <div className="space-y-6 text-foreground/70 text-sm leading-relaxed">
@@ -85,9 +85,9 @@ const PhilosophyCard = () => {
 const WhoWeWorkWith = () => {
   return (
     <>
-      <section className="py-24 overflow-hidden bg-background">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section className="py-16 md:py-24 overflow-hidden bg-background">
+        <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -100,10 +100,10 @@ const WhoWeWorkWith = () => {
                 transition={{ duration: 0.6 }}
               >
                 <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-4">Our Clients</p>
-                <h2 className="font-display text-4xl md:text-5xl font-medium mb-8 leading-[1.1] tracking-tight">
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium mb-6 md:mb-8 leading-[1.1] tracking-tight">
                   Built for Businesses Ready to Grow
                 </h2>
-                <p className="text-foreground/70 mb-10 leading-relaxed max-w-md text-lg">
+                <p className="text-foreground/70 mb-8 md:mb-10 leading-relaxed max-w-md text-base md:text-lg">
                   We work with technical teams and founders that understand the importance of truly reliable digital infrastructure.
                 </p>
               </motion.div>

@@ -108,7 +108,7 @@ const Hero = () => {
       >
         <motion.h1
           variants={itemVariants}
-          className="font-display font-medium text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tighter text-foreground"
+          className="font-display font-medium text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tighter text-foreground"
         >
           Guiding Businesses <br className="md:hidden" /> Through
           <br className="hidden md:block" /> the <span className="text-foreground/60">Digital Ocean.</span>
@@ -116,7 +116,7 @@ const Hero = () => {
 
         <motion.p
           variants={itemVariants}
-          className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-foreground/60 font-normal leading-relaxed tracking-wide"
+          className="mt-6 md:mt-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-foreground/60 font-normal leading-relaxed tracking-wide"
         >
           Lighthouse Labs helps businesses build powerful websites, strengthen their online
           presence, and navigate the digital world with confidence.

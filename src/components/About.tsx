@@ -40,9 +40,9 @@ const About = () => {
   const textY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={containerRef} id="about" className="py-24 overflow-hidden bg-background">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <section ref={containerRef} id="about" className="py-16 md:py-24 overflow-hidden bg-background">
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Text with subtle scroll parallax */}
           <motion.div
             style={{ y: textY }}
@@ -52,10 +52,10 @@ const About = () => {
             viewport={{ once: true, margin: "0px" }}
           >
             <motion.p variants={textVariants} className="text-primary text-xs font-semibold tracking-widest uppercase mb-4">About</motion.p>
-            <motion.h2 variants={textVariants} className="font-display text-4xl md:text-5xl font-medium mb-8 leading-[1.1] tracking-tight">
+            <motion.h2 variants={textVariants} className="font-display text-3xl sm:text-4xl md:text-5xl font-medium mb-6 md:mb-8 leading-[1.1] tracking-tight">
               Your Partner for Digital Growth
             </motion.h2>
-            <div className="space-y-6 text-foreground/70 leading-relaxed text-lg max-w-md">
+            <div className="space-y-4 md:space-y-6 text-foreground/70 leading-relaxed text-base md:text-lg max-w-md">
               <motion.p variants={textVariants}>
                 In today's digital world, a website is more than just an online presence — it's the
                 foundation of how businesses attract customers, communicate value, and scale operations.

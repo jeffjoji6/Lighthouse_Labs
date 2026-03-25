@@ -31,24 +31,24 @@ const itemVariants = {
 
 const Process = () => {
   return (
-    <section id="process" className="py-24 bg-background">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="process" className="py-16 md:py-24 bg-background">
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <motion.div variants={itemVariants} className="mb-20 md:flex items-end justify-between border-b border-border/50 pb-10">
+          <motion.div variants={itemVariants} className="mb-12 md:mb-20 md:flex items-end justify-between border-b border-border/50 pb-8 md:pb-10">
             <div>
-              <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-4">Process</p>
-              <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight">How We Work</h2>
+              <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-3 md:mb-4">Process</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">How We Work</h2>
             </div>
             <p className="hidden md:block text-muted-foreground text-sm max-w-xs text-right leading-relaxed mb-2">
               A systematic approach to building reliable digital infrastructure.
             </p>
           </motion.div>
 
-          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 relative z-10 w-full pt-4">
+          <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 relative z-10 w-full pt-4">
             {steps.map((step, i) => (
               <motion.div
                 key={step.num}

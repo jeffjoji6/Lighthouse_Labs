@@ -79,9 +79,9 @@ const ServiceCard = ({ s }: { s: any }) => {
         }}
       />
 
-      <div className="relative z-10 p-10 h-full cursor-default">
-        <s.icon className="w-8 h-8 text-foreground mb-8 opacity-80" strokeWidth={1.5} />
-        <h3 className="font-display text-xl font-medium tracking-tight mb-3">{s.title}</h3>
+      <div className="relative z-10 p-6 sm:p-8 md:p-10 h-full cursor-default">
+        <s.icon className="w-6 h-6 md:w-8 md:h-8 text-foreground mb-5 md:mb-8 opacity-80" strokeWidth={1.5} />
+        <h3 className="font-display text-lg md:text-xl font-medium tracking-tight mb-2 md:mb-3">{s.title}</h3>
         <p className="text-muted-foreground text-sm leading-relaxed mb-6">{s.desc}</p>
         <ul className="space-y-2">
           {s.bullets.map((b: string) => (
@@ -98,8 +98,8 @@ const ServiceCard = ({ s }: { s: any }) => {
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 bg-background">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="services" className="py-16 md:py-24 bg-background">
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -109,13 +109,13 @@ const Services = () => {
           <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
             <div className="max-w-2xl">
               <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-4">Services</p>
-              <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">
                 Digital Solutions That Move Businesses Forward
               </h2>
             </div>
           </motion.div>
 
-          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6 group/grid">
+          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 group/grid">
             {services.map((s) => (
               <ServiceCard key={s.title} s={s} />
             ))}
