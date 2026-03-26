@@ -96,22 +96,13 @@ const Footer = () => {
           {/* Contact */}
           <motion.div variants={columnVariants} className="col-span-2 md:col-span-1">
             <h4 className="font-display font-medium text-[11px] sm:text-xs uppercase tracking-widest text-[#d4d4d8] mb-4 md:mb-6">Get in Touch</h4>
-            <div className="space-y-3">
-              <a href="mailto:labs.lighthouse@gmail.com" className="block text-xs hover:text-white transition-colors">
+            <div className="space-y-2.5 md:space-y-3">
+              <a href="mailto:labs.lighthouse@gmail.com" className="block text-xs hover:text-white transition-colors duration-300">
                 labs.lighthouse@gmail.com
               </a>
-              <div className="flex gap-5 md:gap-4 pt-3 md:pt-4 flex-wrap">
-                {[
-                  { name: "GitHub", href: "#" },
-                  { name: "LinkedIn", href: "https://www.linkedin.com/in/lighthouse-labs/" },
-                  { name: "X", href: "#" },
-                  { name: "Dribbble", href: "#" }
-                ].map((s) => (
-                  <a key={s.name} href={s.href} target={s.href !== "#" ? "_blank" : undefined} rel={s.href !== "#" ? "noopener noreferrer" : undefined} className="text-xs hover:text-primary transition-colors py-1">
-                    {s.name}
-                  </a>
-                ))}
-              </div>
+              <a href="https://www.linkedin.com/in/lighthouse-labs/" target="_blank" rel="noopener noreferrer" className="block text-xs hover:text-white transition-colors duration-300">
+                LinkedIn
+              </a>
             </div>
           </motion.div>
         </motion.div>

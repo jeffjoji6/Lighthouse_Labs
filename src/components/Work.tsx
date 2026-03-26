@@ -5,16 +5,32 @@ import { useRef } from "react";
 
 const projects = [
   {
-    img: "/project-1.jpg",
-    name: "NovaPay Dashboard",
-    tags: "Fintech · Web App",
-    desc: "A real-time analytics platform designed to process and visualize large-scale financial data.",
+    img: "/project-zenith.png",
+    name: "Zenith @ Twilight",
+    tags: "Hospitality · Website",
+    desc: "A luxury villa resort website showcasing secluded accommodations in Thrissur, featuring immersive visuals and seamless booking integration.",
+    url: "https://zenithtwilight.in/",
   },
   {
-    img: "/project-3.jpg",
-    name: "CartCraft",
+    img: "/project-loadster.png",
+    name: "Loadster",
+    tags: "Food & Beverage · Website",
+    desc: "A bold, visually-driven brand website for Thrissur's ultimate loaded fries, fried chicken, and smashed burger destination.",
+    url: "https://eatloadster.in/",
+  },
+  {
+    img: "/project-jager.png",
+    name: "Jager Clothing",
     tags: "E-Commerce · Platform",
-    desc: "A scalable commerce platform powering modern online storefronts and operational workflows.",
+    desc: "A premium streetwear e-commerce platform with custom apparel design tools, product drops, and nationwide shipping.",
+    url: "https://www.jagerclothing.in/",
+  },
+  {
+    img: "/project-docqueue.png",
+    name: "DocQueue",
+    tags: "Healthcare · Web App",
+    desc: "A healthcare scheduling platform enabling seamless appointment booking, hospital discovery, and visit management.",
+    url: "https://docqueue-main-frontend.onrender.com/",
   },
 ];
 
@@ -50,35 +66,37 @@ const ProjectCard = ({ p, index }: { p: any, index: number }) => {
   // Awwwards-tier internal optical parallax tracking
   const yParallax = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
 
-  return (
+   return (
     <motion.div
       ref={cardRef}
       variants={itemVariants}
       className="group relative rounded-xl cursor-pointer bg-card overflow-hidden" // strict overflow hidden
     >
-      <div className="relative w-full h-[320px] sm:h-[360px] md:h-[400px] overflow-hidden">
-        <motion.img
-          variants={{}} // Crucial: Stop itemVariants cascading down and bouncing the element
-          src={p.img}
-          alt={p.name}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          style={{ y: yParallax, scale: 1.15 }} // Scaled up slightly to prevent bounds clipping during parallax
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 md:from-[#0a0a0a]/90 md:via-[#0a0a0a]/30 md:to-transparent flex flex-col justify-end p-6 md:p-10 opacity-100 md:opacity-90 transition-opacity duration-500 group-hover:opacity-100">
-          <p className="text-[10px] md:text-xs text-primary font-semibold tracking-widest uppercase mb-2 md:mb-3">
-            {p.tags}
-          </p>
-          <h3 className="font-display text-2xl md:text-3xl font-medium tracking-tight mb-2 text-white">
-            {p.name}
-          </h3>
-          <p className="text-white/80 md:text-white/70 text-sm mb-4 md:mb-6 max-w-sm leading-relaxed drop-shadow-md md:drop-shadow-none">
-            {p.desc}
-          </p>
-          <span className="text-white text-sm font-semibold flex items-center gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-            View Case Study <span className="text-primary">→</span>
-          </span>
+      <a href={p.url} target="_blank" rel="noopener noreferrer" className="block">
+        <div className="relative w-full h-[320px] sm:h-[360px] md:h-[400px] overflow-hidden">
+          <motion.img
+            variants={{}} // Crucial: Stop itemVariants cascading down and bouncing the element
+            src={p.img}
+            alt={p.name}
+            className="absolute inset-0 w-full h-full object-cover object-top blur-[3px] opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:blur-0 group-hover:opacity-100"
+            style={{ y: yParallax, scale: 1.15 }} // Scaled up slightly to prevent bounds clipping during parallax
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 md:from-[#0a0a0a]/90 md:via-[#0a0a0a]/30 md:to-transparent flex flex-col justify-end p-6 md:p-10 opacity-100 md:opacity-90 transition-opacity duration-500 group-hover:opacity-100">
+            <p className="text-[10px] md:text-xs text-primary font-semibold tracking-widest uppercase mb-2 md:mb-3">
+              {p.tags}
+            </p>
+            <h3 className="font-display text-2xl md:text-3xl font-medium tracking-tight mb-2 text-white">
+              {p.name}
+            </h3>
+            <p className="text-white/80 md:text-white/70 text-sm mb-4 md:mb-6 max-w-sm leading-relaxed drop-shadow-md md:drop-shadow-none">
+              {p.desc}
+            </p>
+            <span className="text-white text-sm font-semibold flex items-center gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              Visit Project <span className="text-primary">→</span>
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
     </motion.div>
   );
 };
