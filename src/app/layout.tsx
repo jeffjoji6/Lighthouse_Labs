@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import "@/index.css";
 import Providers from "@/components/Providers";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Lighthouse Labs — Engineering What's Next",
   description: "Lighthouse Labs is a full-service software agency building scalable web apps, mobile products, and AI-powered tools for ambitious teams.",
-  metadataBase: new URL('https://lighthouselabs.dev'),
+  metadataBase: new URL('https://lighthouselabs.in'),
   openGraph: {
     title: "Lighthouse Labs — Engineering What's Next",
     description: "Lighthouse Labs is a full-service software agency building scalable web apps, mobile products, and AI-powered tools.",
-    url: "https://lighthouselabs.dev",
+    url: "https://lighthouselabs.in",
     siteName: "Lighthouse Labs",
     images: [{ url: "/logo_emblem.png", width: 800, height: 600, alt: "Lighthouse Labs Logo" }],
     type: "website",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
