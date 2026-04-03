@@ -108,10 +108,9 @@ const Hero = () => {
       >
         <motion.h1
           variants={itemVariants}
-          className="font-display font-medium text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tighter text-foreground"
+          className="font-display font-medium text-[2.5rem] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl md:leading-[1.08] tracking-tighter text-foreground"
         >
-          Guiding Businesses <br className="md:hidden" /> Through
-          <br className="hidden md:block" /> the <span className="text-foreground/60">Digital Ocean.</span>
+          Guiding Businesses <br /> Through the <span className="text-foreground/60">Digital Ocean.</span>
         </motion.h1>
 
         <motion.p
@@ -127,7 +126,7 @@ const Hero = () => {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <motion.a
-            href="#contact"
+            href="/contact"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm shadow-sm transition-colors hover:bg-primary/90"
