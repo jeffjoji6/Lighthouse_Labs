@@ -49,12 +49,12 @@ export default function Contact() {
     <main className="min-h-screen lg:h-screen bg-[#fafafa] text-[#111] flex flex-col relative lg:overflow-hidden">
       <Navbar />
 
-      <section className="flex-1 relative px-6 sm:px-10 py-16 lg:py-0 flex flex-col justify-center">
+      <section className="flex-1 relative px-0 sm:px-10 py-16 lg:py-0 flex flex-col justify-center">
         {/* Ultra-minimalist Ambient Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {/* Quarter Ray Rotating Effect (Positioned bottom right behind the form) */}
-          <div className="absolute -bottom-[30vw] -right-[30vw] w-[110vw] h-[110vw] flex items-center justify-center animate-[spin_240s_linear_infinite] opacity-[0.12]" 
-               style={{ WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 65%)', maskImage: 'radial-gradient(circle at center, black 0%, transparent 65%)' }}>
+          <div className="absolute -bottom-[30vw] -right-[30vw] w-[110vw] h-[110vw] flex items-center justify-center animate-[spin_240s_linear_infinite] opacity-[0.12]"
+            style={{ WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 65%)', maskImage: 'radial-gradient(circle at center, black 0%, transparent 65%)' }}>
             {radialLines}
             <div className="absolute w-[40%] h-[40%] bg-[#fafafa] rounded-full" />
             <div className="absolute w-[60%] h-[60%] border border-dashed border-black rounded-full" />

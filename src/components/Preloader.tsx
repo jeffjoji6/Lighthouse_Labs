@@ -69,7 +69,7 @@ const Preloader = ({ children }: { children: React.ReactNode }) => {
                 initial={{ width: 0, opacity: 0, filter: "blur(8px)", marginLeft: 0 }}
                 animate={{ width: "auto", opacity: 1, filter: "blur(0px)", marginLeft: "1.5rem" }}
                 transition={{ delay: 2.8, duration: 0.8, ease: customCubicReveal }}
-                className="overflow-hidden flex flex-col font-display font-medium leading-[1.1] text-white/95 whitespace-nowrap pl-2"
+                className="overflow-hidden flex flex-col font-display font-medium leading-[1.1] text-white/95 whitespace-nowrap md:pl-2"
               >
                 <span className="text-4xl md:text-6xl uppercase tracking-[0.05em]">Lighthouse</span>
                 <span className="text-4xl md:text-6xl uppercase tracking-[0.05em] text-white/70">Labs</span>

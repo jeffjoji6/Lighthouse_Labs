@@ -6,9 +6,11 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
+
+  const [isMobile, setIsMobile] = useState(false);
 
   // Very tight, responsive spring so it feels snappy and attached exactly to the underlying mouse
   const springConfig = { damping: 25, stiffness: 700, mass: 0.1 };
@@ -17,8 +19,23 @@ export default function CustomCursor() {
 
   useEffect(() => {
     setIsMounted(true);
-    // Ignore mobile since there's no hover
-    if (window.matchMedia("(hover: none)").matches) return;
+
+    const checkMobileState = () => {
+      // Robust live detection to prevent rendering on any touch devices or small screens mid-resize
+      if (
+        window.matchMedia("(hover: none)").matches ||
+        window.matchMedia("(pointer: coarse)").matches ||
+        "ontouchstart" in window ||
+        window.innerWidth < 1024
+      ) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    // Run initial scan
+    checkMobileState();
 
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -33,11 +50,15 @@ export default function CustomCursor() {
       }
     };
 
+    window.addEventListener("resize", checkMobileState);
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("resize", checkMobileState);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [cursorX, cursorY]);
 
-  if (!isMounted) return null;
+  if (!isMounted || isMobile) return null;
 
   return (
     <motion.div
@@ -57,12 +78,12 @@ export default function CustomCursor() {
             d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" // Perfect circle r=35
             fill="none"
           />
-          <text 
-             className="text-[10px] font-display font-medium uppercase fill-white"
+          <text
+            className="text-[10px] font-display font-medium uppercase fill-white"
           >
             {/* Circumference is 2 * 3.14 * 35 = ~220. textLength forces perfect seamless wrap */}
             <textPath href="#cursorTextPath" startOffset="0%" textLength="215" lengthAdjust="spacingAndGlyphs">
-               CLICK TO EXPLORE • CLICK TO EXPLORE • 
+              CLICK TO EXPLORE • CLICK TO EXPLORE •
             </textPath>
           </text>
         </svg>
