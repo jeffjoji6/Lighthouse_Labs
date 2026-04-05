@@ -67,7 +67,7 @@ const Footer = () => {
               <a href="https://www.linkedin.com/company/lighthouse-labs-in/" target="_blank" rel="noopener noreferrer" className="block text-[11px] sm:text-[13px] font-medium text-[#d4d4d8] hover:text-white hover:translate-x-1 origin-left transition-all duration-300">
                 LinkedIn
               </a>
-              <a href="https://www.instagram.com/lighthouselabs_/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="block text-[11px] sm:text-[13px] font-medium text-[#d4d4d8] hover:text-white hover:translate-x-1 origin-left transition-all duration-300">
+              <a href="https://www.instagram.com/lighthouselabs.in/" target="_blank" rel="noopener noreferrer" className="block text-[11px] sm:text-[13px] font-medium text-[#d4d4d8] hover:text-white hover:translate-x-1 origin-left transition-all duration-300">
                 Instagram
               </a>
               <a href="https://www.facebook.com/share/19iHkshHiY/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="block text-[11px] sm:text-[13px] font-medium text-[#d4d4d8] hover:text-white hover:translate-x-1 origin-left transition-all duration-300">
