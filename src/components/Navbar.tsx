@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import AnimatedLogo from "./AnimatedLogo";
 
 const navLinks = ["Services", "Work", "Process", "About"];
 

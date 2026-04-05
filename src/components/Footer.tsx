@@ -22,10 +22,80 @@ const columnVariants = {
   },
 };
 
+const OceanWaves = () => {
+  return (
+    <div className="absolute bottom-0 left-0 w-full h-[180px] md:h-[220px] pointer-events-none z-0 mix-blend-screen opacity-[0.06]">
+
+      {/* Wave 3 - Deep Background, slow */}
+      <motion.svg
+        animate={{ x: [0, -1200] }}
+        transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+        className="absolute bottom-0 left-0 w-[2400px] h-[120px] md:h-[160px] opacity-30"
+        viewBox="0 0 2400 180"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M 0 140 Q 150 110 300 140 T 600 140 T 900 140 T 1200 140 T 1500 140 T 1800 140 T 2100 140 T 2400 140 V 180 H 0 Z"
+          fill="currentColor"
+          className="text-primary"
+        />
+      </motion.svg>
+
+      {/* Wave 2 - Midground, offset phase, medium speed, opposing motion */}
+      <motion.svg
+        animate={{ x: [-1200, 0] }}
+        transition={{ duration: 22, ease: "linear", repeat: Infinity }}
+        className="absolute bottom-0 left-0 w-[2400px] h-[120px] md:h-[160px] opacity-50"
+        viewBox="0 0 2400 180"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M 0 120 Q 150 160 300 120 T 600 120 T 900 120 T 1200 120 T 1500 120 T 1800 120 T 2100 120 T 2400 120 V 180 H 0 Z"
+          fill="white"
+        />
+      </motion.svg>
+
+      {/* Subtle Lighthouse Silhouette */}
+      {/* Positioned between the midground and foreground waves for 3D depth */}
+      <svg
+        viewBox="0 0 64 128"
+        className="absolute bottom-[-10px] right-[10%] md:right-[15%] w-[60px] md:w-[90px] h-auto opacity-70 text-white"
+        fill="currentColor"
+      >
+        <path d="M32 4 L36 10 H28 Z" />
+        <rect x="28" y="10" width="8" height="4" />
+        <rect x="22" y="14" width="20" height="3" rx="1" />
+        <rect x="26" y="17" width="12" height="15" />
+        <rect x="20" y="32" width="24" height="4" rx="1" />
+        <path d="M24 36 L12 128 H52 L40 36 Z" />
+      </svg>
+
+      {/* Wave 1 - Foreground, fast */}
+      <motion.svg
+        animate={{ x: [0, -1200] }}
+        transition={{ duration: 15, ease: "linear", repeat: Infinity }}
+        className="absolute bottom-0 left-0 w-[2400px] h-[120px] md:h-[160px] opacity-90"
+        viewBox="0 0 2400 180"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M 0 100 Q 150 50 300 100 T 600 100 T 900 100 T 1200 100 T 1500 100 T 1800 100 T 2100 100 T 2400 100 V 180 H 0 Z"
+          fill="currentColor"
+          className="text-primary"
+        />
+      </motion.svg>
+
+      {/* Absolute Bottom Solid Cap */}
+      <div className="absolute bottom-0 left-0 w-full h-[5px] bg-primary opacity-50" />
+    </div>
+  );
+};
+
 const Footer = () => {
   return (
-    <footer className="relative bg-[#0a0a0a] text-[#a1a1aa] overflow-hidden pt-16 md:pt-24 pb-10 md:pb-12">
-      <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
+    <footer className="relative bg-[#0a0a0a] text-[#a1a1aa] overflow-hidden pt-16 md:pt-24 pb-10 md:pb-10">
+      <OceanWaves />
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl relative z-10">
 
         <motion.div
           variants={containerVariants}
@@ -83,7 +153,7 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-12 md:mt-20 pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6"
+          className="mt-12 md:mt-20 pt-6 md:pt-8  flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6"
         >
           <p className="text-[10px] leading-relaxed max-w-2xl opacity-50">
             Lighthouse Labs is a technical development studio specializing in modern internet systems, e-commerce architectures, and advanced web applications.

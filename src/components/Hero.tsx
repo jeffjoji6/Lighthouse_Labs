@@ -54,7 +54,7 @@ const Hero = () => {
       style={{ transform: `rotate(${i * 5}deg)` }}
     />
   ));
-  
+
   const glowingLines = Array.from({ length: 72 }).map((_, i) => (
     <div
       key={`glow-${i}`}
@@ -64,14 +64,14 @@ const Hero = () => {
   ));
 
   return (
-    <section 
+    <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onTouchMove={handleMouseMove}
       className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-background pt-32"
     >
       {/* Background Interactive Visuals tied to Scroll */}
-      <motion.div 
+      <motion.div
         style={{ scale: bgScale }}
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
       >
@@ -84,9 +84,9 @@ const Hero = () => {
             <div className="absolute w-[1000px] h-[1000px] border border-dashed border-foreground opacity-50 bg-transparent rounded-full" />
           </div>
         </div>
-        
+
         {/* Interactive glowing spotlight layer */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 flex items-center justify-center opacity-40 mix-blend-multiply"
           style={{ WebkitMaskImage: maskImage, maskImage }}
         >
@@ -108,7 +108,7 @@ const Hero = () => {
       >
         <motion.h1
           variants={itemVariants}
-          className="font-display font-medium text-[2.5rem] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl md:leading-[1.08] tracking-tighter text-foreground"
+          className="font-display font-medium text-[2.5rem] leading-[1.1] sm:text-5xl md:text-7xl md:leading-[1.08] tracking-tighter text-foreground"
         >
           Guiding Businesses <br /> Through the <span className="text-foreground/60">Digital Ocean.</span>
         </motion.h1>

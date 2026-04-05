@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { Send, Loader2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -12,20 +12,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  // High-performance Framer Motion values for 3D cursor tracking
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-1, 1], [80, 50]), { stiffness: 60, damping: 20 });
-  const rotateY = useSpring(useTransform(mouseX, [-1, 1], [-25, 25]), { stiffness: 60, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const x = (e.clientX / window.innerWidth) * 2 - 1;
-    const y = (e.clientY / window.innerHeight) * 2 - 1;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -33,8 +19,6 @@ export default function Contact() {
 
     if (!formRed.current) return;
 
-    // TODO: Need user's EmailJS tokens here
-    // ServiceID, TemplateID, PublicKey
     emailjs
       .sendForm('service_43dnadc', 'template_ry940gb', formRed.current, {
         publicKey: 'l_eHLlAfKqqbOy4Xe',
@@ -53,136 +37,145 @@ export default function Contact() {
       );
   };
 
+  const radialLines = Array.from({ length: 72 }).map((_, i) => (
+    <div
+      key={i}
+      className="absolute w-full h-[1px] bg-black origin-center"
+      style={{ transform: `rotate(${i * 5}deg)` }}
+    />
+  ));
+
   return (
-    <main onMouseMove={handleMouseMove} className="min-h-screen bg-background text-foreground flex flex-col relative overflow-hidden">
+    <main className="min-h-screen lg:h-screen bg-[#fafafa] text-[#111] flex flex-col relative lg:overflow-hidden">
       <Navbar />
 
-      <section className="flex-1 relative py-32 md:py-40 px-5 sm:px-6">
-        {/* Interactive 3D Spatial Grid Background */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden [perspective:1200px]">
-          <motion.div
-            animate={{ rotateZ: [0, 360] }}
-            transition={{ rotateZ: { duration: 360, ease: "linear", repeat: Infinity } }}
-            className="w-[200vw] h-[200vw] md:w-[150vw] md:h-[150vw] opacity-50 mix-blend-plus-lighter"
-            style={{
-              backgroundImage: 'linear-gradient(to right, hsl(var(--primary) / 0.25) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--primary) / 0.25) 1px, transparent 1px)',
-              backgroundSize: '80px 80px',
-              rotateX,
-              rotateY,
-            }}
-          />
-          {/* Deep Vignette Mask to blend edges smoothly into the page */}
-          <div className="absolute inset-0 bg-background pointer-events-none" style={{ WebkitMaskImage: 'radial-gradient(circle at center, transparent 15%, black 80%)', maskImage: 'radial-gradient(circle at center, transparent 15%, black 80%)' }} />
+      <section className="flex-1 relative px-6 sm:px-10 py-16 lg:py-0 flex flex-col justify-center">
+        {/* Ultra-minimalist Ambient Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Quarter Ray Rotating Effect (Positioned bottom right behind the form) */}
+          <div className="absolute -bottom-[30vw] -right-[30vw] w-[110vw] h-[110vw] flex items-center justify-center animate-[spin_240s_linear_infinite] opacity-[0.12]" 
+               style={{ WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 65%)', maskImage: 'radial-gradient(circle at center, black 0%, transparent 65%)' }}>
+            {radialLines}
+            <div className="absolute w-[40%] h-[40%] bg-[#fafafa] rounded-full" />
+            <div className="absolute w-[60%] h-[60%] border border-dashed border-black rounded-full" />
+            <div className="absolute w-[80%] h-[80%] border border-dashed border-black opacity-50 rounded-full" />
+          </div>
+
+          {/* Ambient Glows */}
+          <div className="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-primary/10 blur-[120px] mix-blend-multiply" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-black/[0.02] blur-[100px] mix-blend-multiply" />
+
+          {/* Premium Noise Texture */}
+          <div className="absolute inset-0 opacity-[0.06] mix-blend-darken" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
         </div>
 
-        <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="container mx-auto max-w-[1400px] relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-10"
+            className="mb-8 lg:mb-10 xl:mb-16"
           >
-            <Link href="/" className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-primary transition-colors">
-              <ArrowLeft className="w-4 h-4" /> Go Back
-            </Link>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-
+          {/* Desktop Single-Screen Layout Lock */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start relative w-full pt-2">
             {/* Left Col - Info */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col justify-center"
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+              className="lg:col-span-5 flex flex-col"
             >
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
+              <h1 className="font-display text-5xl md:text-6xl xl:text-[4.5rem] font-medium tracking-tight leading-[1.05] mb-6 xl:mb-8 mt-2">
                 Let's turn your idea into <span className="text-primary italic font-serif">reality.</span>
               </h1>
-              <p className="text-foreground/70 text-base md:text-lg max-w-md leading-relaxed mb-6">
-                Have a project in mind or just want to say hi? We'd love to hear from you. Drop us a message below, or email us directly at <a href="mailto:sales@lighthouselabs.in" className="text-primary hover:underline transition-all">sales@lighthouselabs.in</a>. We'll get back to you as soon as possible.
+              <p className="text-black/70 text-base md:text-lg xl:text-xl font-light max-w-md leading-relaxed mb-4">
+                Have a project in mind or just want to say hi? We'd love to hear from you. Drop us a message below, or email us directly at <a href="mailto:sales@lighthouselabs.in" className="text-black hover:text-primary transition-colors border-b border-black/40 hover:border-primary pb-0.5">sales@lighthouselabs.in</a>.
               </p>
             </motion.div>
 
             {/* Right Col - Form */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
+              className="lg:col-span-6 lg:col-start-7"
             >
               <form
                 ref={formRed}
                 onSubmit={sendEmail}
-                className="bg-card w-full p-8 sm:p-10 rounded-2xl border border-white/5 shadow-2xl relative"
+                className="w-full flex flex-col gap-6 xl:gap-8 bg-white border border-black/10 rounded-3xl p-6 md:p-8 xl:p-10 shadow-2xl shadow-black-[0.03]"
               >
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-xs font-semibold uppercase tracking-widest text-foreground/50">First Name</label>
-                      <input
-                        required
-                        type="text"
-                        name="user_firstname"
-                        className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
-                        placeholder="John"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-semibold uppercase tracking-widest text-foreground/50">Last Name</label>
-                      <input
-                        required
-                        type="text"
-                        name="user_lastname"
-                        className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
-                        placeholder="Doe"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-widest text-foreground/50">Email Address</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:gap-8">
+                  <div className="relative group">
+                    <label className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/50 block mb-1">First Name</label>
                     <input
                       required
-                      type="email"
-                      name="user_email"
-                      className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
-                      placeholder="john@example.com"
+                      type="text"
+                      name="user_firstname"
+                      className="w-full bg-transparent border-b border-black/30 py-2 xl:py-3 text-base xl:text-lg focus:outline-none focus:border-primary transition-colors text-black placeholder:text-black/30 rounded-none"
+                      placeholder="John"
                     />
                   </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-widest text-foreground/50">Your Message</label>
-                    <textarea
+                  <div className="relative group">
+                    <label className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/50 block mb-1">Last Name</label>
+                    <input
                       required
-                      name="message"
-                      rows={4}
-                      className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all resize-none"
-                      placeholder="Tell us about your project..."
+                      type="text"
+                      name="user_lastname"
+                      className="w-full bg-transparent border-b border-black/30 py-2 xl:py-3 text-base xl:text-lg focus:outline-none focus:border-primary transition-colors text-black placeholder:text-black/30 rounded-none"
+                      placeholder="Doe"
                     />
                   </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-lg font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
-                    ) : (
-                      <><Send className="w-4 h-4" /> Send Message</>
-                    )}
-                  </button>
+                <div className="relative group">
+                  <label className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/50 block mb-1">Email Address</label>
+                  <input
+                    required
+                    type="email"
+                    name="user_email"
+                    className="w-full bg-transparent border-b border-black/30 py-2 xl:py-3 text-base xl:text-lg focus:outline-none focus:border-primary transition-colors text-black placeholder:text-black/30 rounded-none"
+                    placeholder="john@example.com"
+                  />
+                </div>
 
+                <div className="relative group">
+                  <label className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/50 block mb-1">Your Message</label>
+                  <textarea
+                    required
+                    name="message"
+                    rows={1}
+                    className="w-full bg-transparent border-b border-black/30 py-2 xl:py-3 text-base xl:text-lg focus:outline-none focus:border-primary transition-colors text-black placeholder:text-black/30 resize-none min-h-[3rem] xl:min-h-[4rem] rounded-none"
+                    placeholder="Tell us about your project..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-2 xl:mt-4 bg-primary hover:bg-primary/90 text-white py-4 rounded-xl font-bold text-xs xl:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] shadow-xl shadow-primary/20"
+                >
+                  {isSubmitting ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Sending</>
+                  ) : (
+                    <>Send Message <Send className="w-4 h-4 ml-1" /></>
+                  )}
+                </button>
+
+                {/* Status Messages */}
+                <AnimatePresence>
                   {status === "success" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 p-4 text-xs font-medium text-green-400 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
-                      Thank you! Your message has been sent successfully. We will get back to you soon.
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="p-3 xl:p-4 text-xs font-medium text-green-700 bg-green-500/10 border border-green-500/20 rounded-lg text-center mt-2">
+                      We've received your message! We will get back to you soon.
                     </motion.div>
                   )}
                   {status === "error" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 p-4 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg text-center">
-                      Oops! Something went wrong. Please check your EmailJS configuration or try again later.
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="p-3 xl:p-4 text-xs font-medium text-red-700 bg-red-500/10 border border-red-500/20 rounded-lg text-center mt-2">
+                      Oops! Something went wrong. Please check your EmailJS setup.
                     </motion.div>
                   )}
-                </div>
+                </AnimatePresence>
               </form>
             </motion.div>
           </div>

@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
+import Preloader from "@/components/Preloader";
+import CustomCursor from "@/components/CustomCursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,9 +38,12 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <CustomCursor />
+        <Preloader>
+          <Providers>
+            {children}
+          </Providers>
+        </Preloader>
         <Analytics />
       </body>
     </html>
