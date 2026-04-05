@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import emailjs from '@emailjs/browser';
 import { Send, Loader2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -11,6 +11,20 @@ export default function Contact() {
   const formRed = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // High-performance Framer Motion values for 3D cursor tracking
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-1, 1], [80, 50]), { stiffness: 60, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [-1, 1], [-25, 25]), { stiffness: 60, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const x = (e.clientX / window.innerWidth) * 2 - 1;
+    const y = (e.clientY / window.innerHeight) * 2 - 1;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,23 +54,34 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground flex flex-col">
+    <main onMouseMove={handleMouseMove} className="min-h-screen bg-background text-foreground flex flex-col relative overflow-hidden">
       <Navbar />
 
-      <section className="flex-1 relative py-32 md:py-40 overflow-hidden px-5 sm:px-6">
-        {/* Background Gradients */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px]" />
+      <section className="flex-1 relative py-32 md:py-40 px-5 sm:px-6">
+        {/* Interactive 3D Spatial Grid Background */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden [perspective:1200px]">
+          <motion.div
+            animate={{ rotateZ: [0, 360] }}
+            transition={{ rotateZ: { duration: 360, ease: "linear", repeat: Infinity } }}
+            className="w-[200vw] h-[200vw] md:w-[150vw] md:h-[150vw] opacity-50 mix-blend-plus-lighter"
+            style={{
+              backgroundImage: 'linear-gradient(to right, hsl(var(--primary) / 0.25) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--primary) / 0.25) 1px, transparent 1px)',
+              backgroundSize: '80px 80px',
+              rotateX,
+              rotateY,
+            }}
+          />
+          {/* Deep Vignette Mask to blend edges smoothly into the page */}
+          <div className="absolute inset-0 bg-background pointer-events-none" style={{ WebkitMaskImage: 'radial-gradient(circle at center, transparent 15%, black 80%)', maskImage: 'radial-gradient(circle at center, transparent 15%, black 80%)' }} />
         </div>
 
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
+            className="mb-10"
           >
-            <Link href="/" className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-primary transition-colors mb-6">
+            <Link href="/" className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-primary transition-colors">
               <ArrowLeft className="w-4 h-4" /> Go Back
             </Link>
           </motion.div>

@@ -68,18 +68,18 @@ const About = () => {
             Your Partner for <br /> Digital Growth
           </motion.h2>
           
-          <div className="space-y-4 sm:space-y-6 text-foreground/70 leading-relaxed text-base sm:text-lg md:text-2xl max-w-3xl mx-auto font-light px-2 sm:px-0">
-            <motion.p variants={textVariants} className="opacity-90">
+          <div className="space-y-4 sm:space-y-6 text-muted-foreground leading-relaxed text-base md:text-lg max-w-2xl mx-auto px-2 sm:px-0">
+            <motion.p variants={textVariants}>
               In today's digital world, a website is more than just an online presence — it's the
               foundation of how businesses attract customers, communicate value, and scale operations.
             </motion.p>
-            <motion.p variants={textVariants} className="opacity-90">
+            <motion.p variants={textVariants}>
               At Lighthouse Labs, we help businesses navigate this landscape by designing and building
               modern websites, scalable web platforms, and digital systems that work reliably as
               companies grow.
             </motion.p>
-            <motion.p variants={textVariants} className="pt-6 sm:pt-4">
-              <span className="text-foreground font-medium text-lg sm:text-2xl md:text-3xl inline-block px-4 sm:px-0 border-l-2 border-primary sm:border-none pl-4 sm:pl-0 text-left sm:text-center">
+            <motion.p variants={textVariants} className="pt-6 sm:pt-8">
+              <span className="text-foreground font-medium font-display text-xl sm:text-2xl md:text-3xl inline-block px-4 sm:px-0 border-l-2 border-primary sm:border-none pl-4 sm:pl-0 text-left sm:text-center tracking-tight">
                 Our focus is simple: build technology that moves businesses forward.
               </span>
             </motion.p>

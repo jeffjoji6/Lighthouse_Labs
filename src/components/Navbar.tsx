@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const navLinks = ["Services", "Work", "Process", "About"];
 
@@ -24,32 +25,32 @@ const Navbar = () => {
         }`}
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-6">
-        <a href="#" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <img src="/logo.png" alt="Lighthouse Labs" className="h-8 w-auto object-contain" />
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link}
-              href={`#${link.toLowerCase()}`}
+              href={`/#${link.toLowerCase()}`}
               className="group relative text-base font-semibold text-foreground/80 hover:text-primary transition-colors duration-200"
             >
               {link}
               {/* Animated underline */}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </a>
+            </Link>
           ))}
         </div>
 
-        <motion.a
-          href="/contact"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-sm hover:shadow-primary/25 transition-shadow duration-200"
-        >
-          Start a Project
-        </motion.a>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:inline-flex">
+          <Link
+            href="/contact"
+            className="items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-sm hover:shadow-primary/25 transition-shadow duration-200"
+          >
+            Start a Project
+          </Link>
+        </motion.div>
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -72,27 +73,34 @@ const Navbar = () => {
           >
             <div className="px-6 pb-6 pt-2 flex flex-col gap-4">
               {navLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => setMobileOpen(false)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="block py-2 text-muted-foreground hover:text-foreground transition-colors font-medium text-lg"
                 >
-                  {link}
-                </motion.a>
+                  <Link
+                    href={`/#${link.toLowerCase()}`}
+                    onClick={() => setMobileOpen(false)}
+                    className="block py-2 text-muted-foreground hover:text-foreground transition-colors font-medium text-lg"
+                  >
+                    {link}
+                  </Link>
+                </motion.div>
               ))}
-              <motion.a
-                href="/contact"
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
-                className="mt-2 inline-flex justify-center px-5 py-3 rounded-full bg-primary text-primary-foreground text-base font-semibold"
               >
-                Start a Project
-              </motion.a>
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 inline-flex justify-center px-5 py-3 rounded-full bg-primary text-primary-foreground text-base font-semibold"
+                >
+                  Start a Project
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
