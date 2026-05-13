@@ -12,29 +12,44 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const sendEmail = (e: React.FormEvent) => {
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("idle");
 
     if (!formRed.current) return;
 
-    emailjs
-      .sendForm('service_43dnadc', 'template_ry940gb', formRed.current, {
+    try {
+      // 1. Send data to CRM
+      const formData = new FormData(formRed.current);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Placeholder API endpoint for the CRM - replace with your actual CRM endpoint
+      const crmEndpoint = process.env.NEXT_PUBLIC_CRM_URL 
+        ? `${process.env.NEXT_PUBLIC_CRM_URL}/api/webhooks/contact`
+        : 'https://app.lighthouselabs.in/api/webhooks/contact';
+
+      // We don't await this so it doesn't block the EmailJS send, 
+      // or we can await it if we want to guarantee it. We'll do it in parallel or fire-and-forget.
+      fetch(crmEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).catch(err => console.error("CRM Sync Error:", err));
+
+      // 2. Keep EmailJS as it is
+      await emailjs.sendForm('service_43dnadc', 'template_ry940gb', formRed.current, {
         publicKey: 'l_eHLlAfKqqbOy4Xe',
-      })
-      .then(
-        () => {
-          setStatus("success");
-          setIsSubmitting(false);
-          formRed.current?.reset();
-        },
-        (error) => {
-          console.error('FAILED...', error.text);
-          setStatus("error");
-          setIsSubmitting(false);
-        },
-      );
+      });
+
+      setStatus("success");
+      formRed.current?.reset();
+    } catch (error: any) {
+      console.error('FAILED...', error.text || error);
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const radialLines = Array.from({ length: 72 }).map((_, i) => (
