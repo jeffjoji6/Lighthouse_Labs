@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef } from "react";
-import { Send, Loader2, ArrowLeft } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 export default function Forms() {
